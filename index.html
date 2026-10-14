@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Abdelali Ouhsine — Data Analyst & BI Consultant. Power BI, SQL, Python and Tableau dashboards that show where your money is made and lost.">
+<meta property="og:title" content="Abdelali Ouhsine — Data Analyst & BI Consultant">
+<meta property="og:description" content="Dashboards, data warehouses and analysis for growing businesses.">
+<meta property="og:image" content="img/photo.jpg">
+<title>Abdelali Ouhsine · Data Analyst & BI Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: navy hero band with photo, then a single reading column of sections; case studies as text + framed dashboard pairs. */
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --sunk:#E9EEF5; --fg:#0D1B30; --muted:#566579; --line:#D6DEE9;
+  --navy:#0B1F3A; --on-navy:#FFFFFF; --on-navy-muted:#B9C7DB;
+  --accent:#E8A23A; --accent-ink:#0B1F3A; --teal:#17807A; --insight:#FFF4E1;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#08121F; --surface:#0F1D30; --sunk:#14253C; --fg:#E6ECF4; --muted:#9AA9BE; --line:#22354F;
+  --navy:#0A1830; --on-navy:#FFFFFF; --on-navy-muted:#AFC0D8;
+  --accent:#F0B04E; --accent-ink:#0B1F3A; --teal:#3DB7AE; --insight:#2A2414; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#08121F; --surface:#0F1D30; --sunk:#14253C; --fg:#E6ECF4; --muted:#9AA9BE; --line:#22354F;
+  --navy:#0A1830; --on-navy:#FFFFFF; --on-navy-muted:#AFC0D8;
+  --accent:#F0B04E; --accent-ink:#0B1F3A; --teal:#3DB7AE; --insight:#2A2414; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+h1,h2,h3{font-family:var(--display);line-height:1.08;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h2{font-size:clamp(28px,4.2vw,44px);font-weight:800}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section.block{padding-block:clamp(56px,8vw,96px)}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.lead{color:var(--muted);font-size:18px;max-width:62ch;margin-top:14px}
+.mono{font-family:var(--mono)}
+ul.tick{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+ul.tick li{position:relative;padding-left:18px}
+ul.tick li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--teal)}
+
+/* ---------- HERO ---------- */
+.hero{background:var(--navy);color:var(--on-navy);overflow:hidden;position:relative}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(90deg,#000 0%,transparent 75%)}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(24px,5vw,64px);align-items:center;padding-block:clamp(48px,7vw,88px) 0;position:relative}
+.hero .kick{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(48px,8vw,96px);font-weight:800;margin-top:18px;letter-spacing:-.03em}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line span{display:inline-block}
+.hero .role{font-size:clamp(17px,2vw,21px);color:var(--on-navy-muted);margin-top:14px}
+.hero .thesis{font-family:var(--display);font-weight:700;font-size:clamp(20px,2.4vw,26px);line-height:1.3;margin-top:30px;max-width:30ch;border-left:3px solid var(--accent);padding-left:18px}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px var(--body);padding:12px 20px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;transition:transform .2s,background .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{border-color:rgba(255,255,255,.35);color:var(--on-navy);background:transparent}
+.btn.ghost:hover{border-color:var(--on-navy)}
+.photo{position:relative;align-self:end}
+.photo .frame{aspect-ratio:4/5;max-width:100%;border-radius:18px 18px 0 0;overflow:hidden;background:#13305A}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.kpi{position:absolute;left:-28px;bottom:36px;width:min(270px,80%);background:var(--surface);color:var(--fg);border-radius:var(--r);padding:16px 18px;box-shadow:0 18px 40px rgba(3,10,25,.35)}
+.kpi .t{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.kpi .row{display:grid;grid-template-columns:72px 1fr 36px;align-items:center;gap:8px;font-size:13px;margin-top:9px}
+.kpi .bar{height:9px;background:var(--sunk);border-radius:5px;overflow:hidden}
+.kpi .bar i{display:block;height:100%;border-radius:5px;background:var(--teal);transform-origin:left;width:calc(var(--v)*100%)}
+.kpi .row:first-of-type .bar i{background:var(--accent)}
+.kpi .v{font-family:var(--mono);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.kpi .src{font-size:11.5px;color:var(--muted);margin-top:10px}
+
+/* ticker */
+.ticker{border-top:1px solid rgba(255,255,255,.12);margin-top:clamp(36px,5vw,56px);overflow:hidden;position:relative}
+.ticker .track{display:flex;width:max-content;gap:48px;padding-block:16px;font-family:var(--mono);font-size:14px;color:var(--on-navy-muted)}
+.ticker b{color:var(--accent);font-weight:500;margin-right:8px}
+.ticker:hover .track{animation-play-state:paused}
+
+/* ---------- ABOUT ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+.stat .n{font-family:var(--display);font-size:clamp(34px,4vw,46px);font-weight:800;font-variant-numeric:tabular-nums;color:var(--fg)}
+.stat .l{font-size:14px;color:var(--muted);line-height:1.4}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(24px,5vw,56px);margin-top:48px}
+.about-grid > *{min-width:0}
+.timeline{position:relative;padding-left:26px;display:grid;gap:24px;margin-top:16px}
+.timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.timeline .item{position:relative}
+.timeline .item::before{content:"";position:absolute;left:-26px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--teal)}
+.timeline .t{font-weight:600}
+.timeline .m{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px}
+.panel + .panel{margin-top:16px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tag{font-family:var(--mono);font-size:12.5px;padding:5px 11px;border-radius:999px;background:var(--sunk);color:var(--fg);transition:background .2s,color .2s,transform .2s}
+.tag:hover{background:var(--teal);color:#fff;transform:translateY(-2px)}
+.certs{columns:2;column-gap:24px;font-size:14.5px;margin-top:12px}
+.certs li{break-inside:avoid;margin-bottom:7px}
+
+/* ---------- SERVICES ---------- */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;align-items:start}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px 26px;position:relative;transition:transform .3s,box-shadow .3s}
+.plan:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(11,31,58,.14)}
+.plan.hot{border:2px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,conic-gradient(from var(--ang,0deg),var(--accent),var(--teal),var(--accent)) border-box}
+.plan .badge{position:absolute;top:-13px;left:24px;background:var(--accent);color:var(--accent-ink);font:700 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:999px}
+.plan .name{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.plan h3{margin-top:8px;font-size:22px}
+.plan .price{font-family:var(--display);font-size:38px;font-weight:800;margin-top:14px;font-variant-numeric:tabular-nums}
+.plan .price small{font-family:var(--body);font-size:14px;font-weight:500;color:var(--muted)}
+.plan .for{color:var(--muted);font-size:15px;margin:6px 0 18px}
+.plan ul{font-size:15px}
+.plan .bonus{margin-top:20px;padding-top:16px;border-top:1px dashed var(--line);font-size:14px}
+.plan .bonus b{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;font-weight:500}
+.addons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.addon{border:1px dashed var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px}
+.addon b{display:block}
+.addon span{color:var(--muted)}
+.promise{margin-top:22px;background:var(--navy);color:var(--on-navy);border-radius:18px;padding:24px 28px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.promise b{display:block;color:var(--accent);font-family:var(--display);font-size:17px;margin-bottom:4px}
+.promise p{color:var(--on-navy-muted);font-size:14.5px}
+
+/* ---------- PROCESS ---------- */
+.steps{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:44px}
+.steps .rail{position:absolute;left:0;right:0;top:21px;height:2px;background:var(--line)}
+.steps .rail i{display:block;height:100%;background:var(--accent);transform-origin:left;transform:scaleX(1)}
+.step{position:relative}
+.step .dot{width:44px;height:44px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);display:grid;place-items:center;font:600 14px var(--mono);color:var(--fg);position:relative}
+.step b{display:block;margin-top:14px;font-family:var(--display);font-size:17px}
+.step p{color:var(--muted);font-size:14.5px;margin-top:4px}
+.meta-line{margin-top:30px;color:var(--muted);font-size:15px}
+.meta-line b{color:var(--fg)}
+
+/* ---------- WORK ---------- */
+.case{display:grid;grid-template-columns:1fr 1.7fr;gap:clamp(24px,4vw,52px);align-items:start;padding-block:48px;border-top:1px solid var(--line)}
+.case:first-of-type{border-top:0}
+.case > *{min-width:0}
+.case.flip{grid-template-columns:1.7fr 1fr}
+.case.flip .text{order:2}
+.case h3{font-size:clamp(22px,2.6vw,30px);margin-top:4px}
+.case h4{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin:22px 0 8px}
+.case .text p,.case .text li{font-size:15.5px}
+.insight{background:var(--insight);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:10px 14px;font-size:15px;margin-top:8px}
+.stack{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-top:16px}
+.screen{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 18px 40px rgba(11,31,58,.12);position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px)}
+.screen .bar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.screen .bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.screen .bar span{margin-left:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.screen button.zoom{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;overflow:hidden}
+.screen img{display:block;width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.screen button.zoom:hover img{transform:scale(1.035)}
+.tabs{display:flex;gap:6px;padding:10px 12px 0;flex-wrap:wrap}
+.tabs button{font:500 13px var(--mono);border:1px solid var(--line);background:var(--bg);color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.tabpanes{display:grid;padding:10px 12px 12px}
+.tabpanes > *{grid-area:1/1}
+.tabpanes .zoom{transition:opacity .45s,transform .45s}
+.tabpanes .zoom[data-off]{opacity:0;transform:translateY(8px);pointer-events:none}
+
+.flow{overflow-x:auto;margin-top:14px}
+.flow svg{display:block;min-width:420px;width:100%;height:auto}
+.flow .node rect{fill:var(--sunk);stroke:var(--line)}
+.flow .node text{fill:var(--fg);font:600 13px var(--mono)}
+.flow .node.bz rect{stroke:#B07A45}.flow .node.sv rect{stroke:#8E9BAA}.flow .node.gd rect{stroke:var(--accent)}
+.flow path{stroke:var(--teal);stroke-width:2;fill:none;stroke-dasharray:5 7}
+
+/* more projects */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--teal)}
+.card .meta{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.card p{font-size:15px}
+.card .insight{margin-top:auto}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--teal);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);margin-top:10px;font-size:15px}
+
+/* cta */
+.cta{background:var(--navy);color:var(--on-navy)}
+.cta .wrap{padding-block:clamp(56px,8vw,96px);display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center}
+.cta h2{color:var(--on-navy)}
+.cta p{color:var(--on-navy-muted);margin-top:14px;max-width:48ch;font-size:17px}
+.contact{display:grid;gap:10px}
+.contact .row{display:flex;justify-content:space-between;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;min-width:0}
+.contact .row > div{min-width:0}
+.contact .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.contact .val{user-select:all;overflow-wrap:anywhere}
+.contact a.val{text-decoration:none}
+.contact a.val:hover{text-decoration:underline}
+.copy{font:500 12.5px var(--mono);background:transparent;color:var(--on-navy);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 12px;cursor:pointer;flex:none}
+footer{background:var(--navy);color:var(--on-navy-muted);font-size:13px;border-top:1px solid rgba(255,255,255,.1)}
+footer .wrap{padding-block:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(4,10,20,.88);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));z-index:50;cursor:zoom-out}
+.lightbox img{max-width:min(1600px,100%);max-height:100%;border-radius:10px;animation:pop .3s ease}
+@keyframes pop{from{transform:scale(.96)}to{transform:none}}
+
+/* ---------- MOTION ---------- */
+@media (prefers-reduced-motion: no-preference){
+  .hero h1 .line span{animation:up .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero h1 .line:nth-child(2) span{animation-delay:.12s}
+  .hero .kick,.hero .role,.hero .thesis,.hero .actions{animation:fadeup .8s cubic-bezier(.2,.7,.2,1) both}
+  .hero .kick{animation-delay:0s}.hero .role{animation-delay:.3s}.hero .thesis{animation-delay:.42s}.hero .actions{animation-delay:.54s}
+  .photo .frame{animation:wipe 1.1s cubic-bezier(.7,0,.2,1) .15s both}
+  .kpi{animation:fadeup .8s cubic-bezier(.2,.7,.2,1) .9s both}
+  .kpi .bar i{animation:grow 1.1s cubic-bezier(.2,.7,.2,1) 1.2s both}
+  .kpi .row:nth-of-type(2) .bar i{animation-delay:1.35s}
+  .kpi .row:nth-of-type(3) .bar i{animation-delay:1.5s}
+  .ticker .track{animation:marquee 38s linear infinite}
+  .plan.hot{animation:spin 6s linear infinite}
+  .flow path{animation:flow 1.2s linear infinite}
+  @supports (animation-timeline: view()){
+    .rise{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+    .steps .rail i{animation:grow linear both;animation-timeline:view();animation-range:entry 20% cover 45%}
+  }
+}
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spin{to{--ang:360deg}}
+@keyframes up{from{transform:translateY(105%)}to{transform:none}}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes wipe{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes rise{from{transform:translateY(36px)}to{transform:none}}
+@keyframes flow{to{stroke-dashoffset:-24}}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr}
+  .photo{max-width:440px;width:100%;justify-self:center}
+  .kpi{left:12px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .about-grid,.case,.case.flip,.cta .wrap{grid-template-columns:1fr}
+  .case.flip .text{order:0}
+  .screen{position:static}
+  .plans{grid-template-columns:1fr;max-width:560px}
+  .addons,.promise{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(3,1fr);row-gap:28px}
+  .steps .rail{display:none}
+  .cards{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:620px){
+  .stats,.addons,.promise,.cards,.faq{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .certs{columns:1}
+  .contact .row{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="kick">Data Analyst &amp; BI Consultant · Agadir, Morocco</div>
+      <h1><span class="line"><span>Abdelali</span></span><span class="line"><span>Ouhsine</span></span></h1>
+      <p class="role">SQL · Python · Power BI · Tableau · Azure</p>
+      <p class="thesis">I turn scattered business data into dashboards that show where your money is made and where it's lost.</p>
+      <div class="actions">
+        <a class="btn primary" href="#contact">Book a free 20-min call</a>
+        <a class="btn ghost" href="#work">See the work</a>
+      </div>
+    </div>
+    <div class="photo">
+      <div class="frame"><img src="img/photo.jpg" alt="Abdelali Ouhsine working at a computer"></div>
+      <div class="kpi" aria-label="Correlation with total customer spend">
+        <div class="t">Correlation with total spend</div>
+        <div class="row"><span>Wine</span><div class="bar"><i style="--v:.89"></i></div><span class="v">0.89</span></div>
+        <div class="row"><span>Catalog</span><div class="bar"><i style="--v:.78"></i></div><span class="v">0.78</span></div>
+        <div class="row"><span>Web / store</span><div class="bar"><i style="--v:.52"></i></div><span class="v">0.52</span></div>
+        <div class="src">From case study 01 · 2,239 customers</div>
+      </div>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true">
+    <div class="track" id="track">
+      <span><b>r = 0.89</b>wine spend vs total spend</span>
+      <span><b>χ² p = 0.87</b>campaign response by country</span>
+      <span><b>300K+</b>flight records modeled</span>
+      <span><b>1 + 8</b>fact + dimension tables, hospital billing</span>
+      <span><b>+20.4%</b>year-over-year sales, Tableau KPI dashboard</span>
+      <span><b>Bronze → Silver → Gold</b>medallion pipelines on Azure</span>
+      <span><b>2,239</b>customers profiled</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ABOUT -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2 class="rise">Clear answers from messy data.</h2>
+    <p class="lead">Data Analyst skilled in SQL, Python and Power BI, with hands-on experience building ETL pipelines, star-schema data models and BI dashboards. I work end to end, from data extraction to executive reporting, so you can decide where to spend, cut and grow.</p>
+
+    <div class="stats">
+      <div class="stat rise"><div class="n" data-count="8" data-suffix="+">8+</div><div class="l">dashboards built in Power BI and Tableau</div></div>
+      <div class="stat rise"><div class="n" data-count="300" data-suffix="K+">300K+</div><div class="l">records modeled in one ML project</div></div>
+      <div class="stat rise"><div class="n" data-count="9">9</div><div class="l">certifications from Microsoft, Google Cloud, IBM and Coursera</div></div>
+      <div class="stat rise"><div class="n" data-count="3">3</div><div class="l">languages: Arabic (native), English (professional), French (intermediate)</div></div>
+    </div>
+
+    <div class="about-grid">
+      <div>
+        <h3>Experience</h3>
+        <div class="timeline">
+          <div class="item rise"><div class="t">Business Data Analyst · Blackmont Consulting</div><div class="m">London, UK (remote) · Internship · Jun – Sep 2026</div><p>Analyzed business data for client engagements and turned findings into clear recommendations for stakeholders. Competitor analyst on internal consulting workstreams.</p></div>
+          <div class="item rise"><div class="t">Data Analyst · Simplon Maghreb</div><div class="m">Agadir, Morocco · Jan – Jun 2026</div><p>End-to-end analytics projects in Agile squads: SQL data warehouses, Python EDA and statistics, Power BI reporting, Azure pipelines.</p></div>
+        </div>
+        <h3 style="margin-top:36px">Training and education</h3>
+        <ul class="tick" style="margin-top:14px">
+          <li><b>Simplon Maghreb x Jobintech</b>, Data Analyst Bootcamp. Six-month intensive covering the full data lifecycle.</li>
+          <li><b>1337 (42 Network)</b>, two-month peer-to-peer program in C and algorithms.</li>
+          <li><b>Big Academy</b>, Full Stack Web Development Certificate (2025).</li>
+          <li><b>Université Ibn Zohr</b>, English Studies (DEUG).</li>
+        </ul>
+      </div>
+      <div>
+        <div class="panel rise">
+          <h3>Toolkit</h3>
+          <div class="tags">
+            <span class="tag">SQL Server / T-SQL</span><span class="tag">PostgreSQL</span><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">SciPy</span><span class="tag">statsmodels</span><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span><span class="tag">Tableau</span><span class="tag">Excel / VBA</span><span class="tag">Power Pivot</span><span class="tag">Azure Data Factory</span><span class="tag">Databricks</span><span class="tag">Delta Lake</span><span class="tag">ETL design</span><span class="tag">Web scraping</span><span class="tag">Docker</span><span class="tag">Git</span><span class="tag">Linux / Bash</span>
+          </div>
+        </div>
+        <div class="panel rise">
+          <h3>Certifications</h3>
+          <ul class="tick certs">
+            <li>Microsoft Azure SQL · Microsoft</li>
+            <li>Introduction to Docker · Google Cloud</li>
+            <li>Introduction to Data Analytics · IBM</li>
+            <li>SQL in Action · Coursera</li>
+            <li>Python Data Science Bootcamp · Udemy</li>
+            <li>Bash Scripting · Codio</li>
+            <li>C Programming · Udemy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="block" id="services" style="background:var(--surface)">
+  <div class="wrap">
+    <div class="eyebrow">Services</div>
+    <h2 class="rise">Three ways to work together.</h2>
+    <p class="lead">Fixed prices and clear deliverables. Every plan ends with a live walkthrough so your team knows how to use what you get.</p>
+
+    <div class="plans">
+      <article class="plan rise">
+        <div class="name">Starter</div>
+        <h3>Data Audit + Starter Dashboard</h3>
+        <div class="price">$450 <small>· 7-day delivery</small></div>
+        <p class="for">For businesses that have data but no clear view of it.</p>
+        <ul class="tick">
+          <li>Audit of up to 3 data sources (Shopify, Excel/CSV, Google Sheets, CRM, ad platforms)</li>
+          <li>Data cleaning and a data quality report</li>
+          <li>1 interactive Power BI dashboard, up to 8 KPIs</li>
+          <li>30-minute walkthrough call</li>
+          <li>1 revision round</li>
+        </ul>
+        <div class="bonus"><b>Bonuses</b><ul class="tick"><li>"Quick Wins" report with 3 actionable insights</li><li>One-page KPI cheat sheet</li><li>7 days of free support</li></ul></div>
+      </article>
+      <article class="plan hot rise">
+        <div class="badge">Most popular</div>
+        <div class="name">Growth</div>
+        <h3>Business Intelligence Suite</h3>
+        <div class="price">$1,500–3,000 <small>· 2–3 weeks</small></div>
+        <p class="for">For growing teams that need decisions backed by data.</p>
+        <ul class="tick">
+          <li>Up to 6 data sources connected and modeled in a star schema</li>
+          <li>Automated ETL with Power Query, SQL or Python</li>
+          <li>3–5 dashboard pages: sales, marketing, operations, finance</li>
+          <li>Custom DAX measures, drill-downs and slicers</li>
+          <li>Scheduled auto-refresh in Power BI Service</li>
+          <li>Documentation and a recorded training video</li>
+          <li>2 revision rounds and 14 days of support</li>
+        </ul>
+        <div class="bonus"><b>Bonuses</b><ul class="tick"><li>All Starter bonuses</li><li>Mobile-optimized dashboard view</li><li>Executive summary page with your top 5 numbers</li><li>First retainer month at 50% off</li><li>Short video tutorial library</li></ul></div>
+      </article>
+      <article class="plan rise">
+        <div class="name">Ongoing</div>
+        <h3>Monthly Analytics Retainer</h3>
+        <div class="price">$500–1,200 <small>/ month</small></div>
+        <p class="for">For ongoing reporting without hiring in-house.</p>
+        <ul class="tick">
+          <li>Dashboard maintenance and refresh monitoring</li>
+          <li>Monthly insights report: 3–5 findings and actions</li>
+          <li>Up to 10 ad-hoc analysis requests (SQL, Python, Excel)</li>
+          <li>New KPIs and pages as the business grows</li>
+          <li>Response within 24h on US business days</li>
+        </ul>
+        <div class="bonus"><b>Bonuses</b><ul class="tick"><li>Quarterly 45-min strategy call</li><li>Free dashboard redesign every 6 months</li><li>Unlimited small tweaks</li><li>Rate locked for 12 months</li></ul></div>
+      </article>
+    </div>
+
+    <div class="addons">
+      <div class="addon rise"><b>Statistical analysis</b><span>A/B tests, ANOVA, correlations · from $250</span></div>
+      <div class="addon rise"><b>Predictive model</b><span>Sales or price forecasting · from $800</span></div>
+      <div class="addon rise"><b>Excel automation</b><span>VBA, Power Pivot · from $200</span></div>
+      <div class="addon rise"><b>Extra dashboard page</b><span>Any plan · $150</span></div>
+    </div>
+
+    <div class="promise rise">
+      <div><b>Satisfaction guarantee</b><p>If the first version doesn't help you make a decision, you don't pay.</p></div>
+      <div><b>Full ownership</b><p>All files, SQL scripts and .pbix files are yours.</p></div>
+      <div><b>NDA on request</b><p>Your data stays confidential.</p></div>
+      <div><b>$100 referral credit</b><p>For every client you refer.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="block" id="process">
+  <div class="wrap">
+    <div class="eyebrow">How we work</div>
+    <h2 class="rise">From first call to live dashboard.</h2>
+    <div class="steps">
+      <div class="rail"><i></i></div>
+      <div class="step"><div class="dot">01</div><b>Discovery call</b><p>Free, 20 minutes. Your goals, data sources and key questions.</p></div>
+      <div class="step"><div class="dot">02</div><b>Proposal</b><p>Within 24 hours: scope, timeline and a fixed price.</p></div>
+      <div class="step"><div class="dot">03</div><b>Kickoff</b><p>50% upfront, then secure access to your data.</p></div>
+      <div class="step"><div class="dot">04</div><b>Build</b><p>Progress updates every 2–3 days.</p></div>
+      <div class="step"><div class="dot">05</div><b>Delivery</b><p>Live demo, revisions, final handover.</p></div>
+      <div class="step"><div class="dot">06</div><b>Support</b><p>Post-delivery fixes, optional retainer.</p></div>
+    </div>
+    <p class="meta-line"><b>Hours:</b> overlap with US mornings, 9am–1pm ET &nbsp;·&nbsp; <b>Payment:</b> Wise, Payoneer or PayPal, invoice with every milestone</p>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="block" id="work" style="background:var(--surface)">
+  <div class="wrap">
+    <div class="eyebrow">Selected work</div>
+    <h2 class="rise">Dashboards built from real business questions.</h2>
+
+    <article class="case">
+      <div class="text">
+        <div class="eyebrow">Marketing analytics · Power BI + Python</div>
+        <h3>Which campaigns, products and channels actually drive revenue?</h3>
+        <h4>The problem</h4>
+        <p>A retailer ran 6 campaigns across 8 countries and 3 sales channels with no clear view of what worked.</p>
+        <h4>What I did</h4>
+        <ul class="tick">
+          <li>Profiled 2,239 customers and 30+ features in Python</li>
+          <li>ANOVA, Chi-Square and Pearson tests to validate drivers</li>
+          <li>Star schema in Power Query with DAX measures</li>
+          <li>Interactive dashboard with country, month and campaign filters</li>
+        </ul>
+        <h4>Key findings</h4>
+        <div class="insight">Wine spending is the #1 revenue lever (r = 0.89 with total spend).</div>
+        <div class="insight">Catalog outperforms web and store (r = 0.78 vs 0.52).</div>
+        <div class="insight">Campaign response is the same in every country (χ² p = 0.87).</div>
+        <div class="stack">Python · pandas · SciPy · statsmodels · Power BI · DAX</div>
+      </div>
+      <div class="screen rise"><div class="bar"><i></i><i></i><i></i><span>Marketing Campaigns.pbix</span></div>
+        <button class="zoom" type="button" aria-label="Enlarge marketing dashboard"><img src="img/marketing.jpg" alt="Power BI marketing campaign dashboard" loading="lazy"></button></div>
+    </article>
+
+    <article class="case flip">
+      <div class="text">
+        <div class="eyebrow">Data warehouse · SQL Server + Power BI</div>
+        <h3>From raw ERP exports to a trusted P&amp;L dashboard.</h3>
+        <h4>The problem</h4>
+        <p>Financial data from a multi-store retailer sat in raw CSV exports: duplicated, inconsistent and impossible to report on.</p>
+        <h4>The pipeline</h4>
+        <div class="flow" aria-label="Bronze to Silver to Gold to Power BI">
+          <svg viewBox="0 0 560 70" role="img">
+            <g class="node bz"><rect x="2" y="15" width="108" height="40" rx="10"/><text x="56" y="40" text-anchor="middle">Bronze</text></g>
+            <g class="node sv"><rect x="152" y="15" width="108" height="40" rx="10"/><text x="206" y="40" text-anchor="middle">Silver</text></g>
+            <g class="node gd"><rect x="302" y="15" width="108" height="40" rx="10"/><text x="356" y="40" text-anchor="middle">Gold</text></g>
+            <g class="node"><rect x="452" y="15" width="106" height="40" rx="10"/><text x="505" y="40" text-anchor="middle">Power BI</text></g>
+            <path d="M112 35 H150"/><path d="M262 35 H300"/><path d="M412 35 H450"/>
+          </svg>
+        </div>
+        <ul class="tick" style="margin-top:14px">
+          <li><b>Bronze:</b> 5 raw tables loaded with BULK INSERT</li>
+          <li><b>Silver:</b> cleaning, type fixes, de-duplication in T-SQL</li>
+          <li><b>Gold:</b> star schema (fact_gl, dimstore, dimaccount) with SQL views</li>
+          <li>Quality checks at every layer, zero records lost</li>
+        </ul>
+        <div class="insight">One dashboard showing amounts by store, region and P&amp;L line, filterable by month.</div>
+        <div class="stack">SQL Server · T-SQL · Medallion architecture · Power BI</div>
+      </div>
+      <div class="screen rise"><div class="bar"><i></i><i></i><i></i><span>Data Warehouse.pbix</span></div>
+        <button class="zoom" type="button" aria-label="Enlarge data warehouse dashboard"><img src="img/dwh.jpg" alt="Power BI data warehouse dashboard" loading="lazy"></button></div>
+    </article>
+
+    <article class="case">
+      <div class="text">
+        <div class="eyebrow">Economic analysis · Power BI</div>
+        <h3>Measuring the economic cost of conflict.</h3>
+        <h4>The question</h4>
+        <p>How do different conflict types affect GDP, unemployment, poverty, food insecurity and currency stability across regions?</p>
+        <h4>What I did</h4>
+        <ul class="tick">
+          <li>Modeled conflict, region and economic indicators</li>
+          <li>Pre-war vs during-war comparisons for unemployment and poverty</li>
+          <li>Two-page report with map, KPI cards and conflict filters</li>
+        </ul>
+        <h4>What the data shows</h4>
+        <div class="insight">Civil wars carry the largest share of war cost (36%) and during-war unemployment (42%).</div>
+        <div class="insight">The Middle East has the highest cost of war of any region.</div>
+        <div class="stack">Power BI · Power Query · DAX · Azure Maps</div>
+      </div>
+      <div class="screen rise"><div class="bar"><i></i><i></i><i></i><span>War Economic Impact.pbix</span></div>
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-tab="w1">Overview</button>
+          <button role="tab" aria-selected="false" data-tab="w2">Regions</button>
+        </div>
+        <div class="tabpanes">
+          <button class="zoom" type="button" data-pane="w1" aria-label="Enlarge overview page"><img src="img/filrouge-1.jpg" alt="War economic impact overview page" loading="lazy"></button>
+          <button class="zoom" type="button" data-pane="w2" data-off aria-label="Enlarge regions page"><img src="img/filrouge-2.jpg" alt="War economic impact regions page" loading="lazy"></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="case flip">
+      <div class="text">
+        <div class="eyebrow">Sales performance · Tableau</div>
+        <h3>Year-over-year sales, profit and customer tracking.</h3>
+        <h4>The goal</h4>
+        <p>One place for sales managers to compare this year against last, by month, week, sub-category and customer.</p>
+        <h4>What I built</h4>
+        <ul class="tick">
+          <li>KPI views for sales, profit and quantity with min/max and % change</li>
+          <li>Weekly sales and profit trend against the average</li>
+          <li>Sub-category comparison: sales CY vs PY, and profit</li>
+          <li>Top 10 customers, year selector, dashboard switching</li>
+        </ul>
+        <h4>Example insight</h4>
+        <div class="insight">2023 sales reached 733K (+20.4%), while tables and machines lost money, a clear signal for a pricing review.</div>
+        <div class="stack">Tableau · LOD calculations · Parameters</div>
+      </div>
+      <div class="screen rise"><div class="bar"><i></i><i></i><i></i><span>Sales Performance.twbx</span></div>
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-tab="t1">KPIs</button>
+          <button role="tab" aria-selected="false" data-tab="t2">Overview</button>
+          <button role="tab" aria-selected="false" data-tab="t3">Customers</button>
+        </div>
+        <div class="tabpanes">
+          <button class="zoom" type="button" data-pane="t1" aria-label="Enlarge KPI dashboard"><img src="img/tab_kpi.jpg" alt="Tableau KPI dashboard" loading="lazy"></button>
+          <button class="zoom" type="button" data-pane="t2" data-off aria-label="Enlarge overview dashboard"><img src="img/tab_dash.jpg" alt="Tableau sales overview dashboard" loading="lazy"></button>
+          <button class="zoom" type="button" data-pane="t3" data-off aria-label="Enlarge customers dashboard"><img src="img/tab_sales.jpg" alt="Tableau customers and orders dashboard" loading="lazy"></button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- MORE PROJECTS -->
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="eyebrow">More projects</div>
+    <h2 class="rise">Engineering, SQL, Excel BI and machine learning.</h2>
+    <div class="cards">
+      <div class="card rise"><h3>Azure Data Engineering Pipeline</h3><div class="meta">Retail · ADF · ADLS Gen2 · Databricks · PySpark · Delta Lake</div><p>Automated pipeline from Azure SQL and a REST API (4 sources) into a Bronze, Silver and Gold lake, with cleaning and multi-source joins in Databricks.</p><div class="insight">Revenue and transaction KPIs refreshed automatically into Power BI.</div></div>
+      <div class="card rise"><h3>Hospital Billing Database</h3><div class="meta">Healthcare · SQL Server · T-SQL</div><p>Star schema with 1 fact table and 8 dimensions modeling the full patient revenue cycle, from care delivery to insurance payment.</p><div class="insight">10 business queries: payer mix, specialty payments, credentialing write-offs.</div></div>
+      <div class="card rise"><h3>Flight Price Prediction</h3><div class="meta">Travel · Team project · Python · Scikit-learn</div><p>300,000+ booking records. EDA, hypothesis tests, preprocessing pipeline and Linear, Ridge and Random Forest models with cross-validation.</p><div class="insight">Target: mean absolute error under €15 with a 95% confidence interval.</div></div>
+      <div class="card rise"><h3>Statistical Data Analysis</h3><div class="meta">Health and automotive data · Python</div><p>Distributions, correlations and hypothesis tests on health expenditure and fuel-efficiency data to separate real trends from noise.</p><div class="insight">Evidence-backed conclusions for non-technical readers.</div></div>
+      <div class="card rise"><h3>Retail BI Ecosystem</h3><div class="meta">Retail · Excel · Power Pivot · DAX</div><p>Interactive dashboard for sales performance monitoring and customer segmentation on a Power Pivot data model.</p><div class="insight">DAX growth and profitability measures for executives.</div></div>
+      <div class="card rise"><h3>Netflix Content Analysis</h3><div class="meta">Streaming · Python · SQL · ETL</div><p>ETL pipeline to ingest and process a large streaming catalog, followed by exploratory analysis.</p><div class="insight">Global content trends and regional market preferences.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block" id="faq" style="background:var(--surface)">
+  <div class="wrap">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="rise">Questions clients ask.</h2>
+    <div class="faq">
+      <details open><summary>What data sources do you work with?</summary><p>Excel, CSV, Google Sheets, SQL databases, Shopify, CRMs, Google Analytics and ad platforms. If it exports, I can connect it.</p></details>
+      <details><summary>Do I need a Power BI license?</summary><p>Not to start. Power BI Desktop is free. Sharing dashboards with a team requires a Power BI Pro license per user.</p></details>
+      <details><summary>How do you handle data security?</summary><p>Read-only access where possible, no data kept after handover, and an NDA on request.</p></details>
+      <details><summary>What time zone do you work in?</summary><p>Morocco (GMT+0), with overlap on US mornings, 9am–1pm Eastern.</p></details>
+      <details><summary>What if I'm not satisfied?</summary><p>If the first version doesn't help you make a decision, you don't pay.</p></details>
+      <details><summary>Can you work with my existing reports?</summary><p>Yes. I can rebuild, clean up or extend dashboards you already have.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow" style="color:var(--accent)">Contact</div>
+      <h2>Let's find the money in your data.</h2>
+      <p>Book a free 20-minute discovery call. You'll leave with at least one idea you can act on, whether we work together or not.</p>
+    </div>
+    <div class="contact">
+      <div class="row"><div><div class="k">Email</div><div class="val" id="v-email">abdaliouhssin@gmail.com</div></div><button class="copy" type="button" data-copy="v-email">Copy</button></div>
+      <div class="row"><div><div class="k">Phone / WhatsApp</div><div class="val" id="v-phone">+212 637 631 123</div></div><button class="copy" type="button" data-copy="v-phone">Copy</button></div>
+      <div class="row"><div><div class="k">LinkedIn</div><a class="val" href="https://www.linkedin.com/in/abdelali-ouhsine-data/" target="_blank" rel="noopener">linkedin.com/in/abdelali-ouhsine-data</a></div></div>
+      <div class="row"><div><div class="k">GitHub</div><a class="val" href="https://github.com/Abdelali-Ouhsine" target="_blank" rel="noopener">github.com/Abdelali-Ouhsine</a></div></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>Abdelali Ouhsine · Data Analyst &amp; BI Consultant</span><span>Agadir, Morocco · GMT+0</span></div></footer>
+
+<div class="lightbox" id="lightbox" hidden><img alt=""></div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Ticker: duplicate content for a seamless loop
+  var track = document.getElementById('track');
+  if (track && !reduce) track.innerHTML += track.innerHTML;
+
+  // Counters: final values are in the HTML; animate only once visible
+  var nums = document.querySelectorAll('[data-count]');
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, to = +el.dataset.count, suf = el.dataset.suffix || '', t0 = null, dur = 1300;
+        function tick(ts){
+          if (!t0) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(to * k) + suf;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }, {threshold: .6});
+    nums.forEach(function(n){ io.observe(n); });
+  }
+
+  // Tabs
+  document.querySelectorAll('.screen').forEach(function(scr){
+    var tabs = scr.querySelectorAll('[role="tab"]');
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        tabs.forEach(function(t){ t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+        scr.querySelectorAll('[data-pane]').forEach(function(p){
+          if (p.dataset.pane === tab.dataset.tab) p.removeAttribute('data-off'); else p.setAttribute('data-off','');
+        });
+      });
+    });
+  });
+
+  // Lightbox
+  var lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
+  document.querySelectorAll('button.zoom').forEach(function(b){
+    b.addEventListener('click', function(){
+      var img = b.querySelector('img');
+      lbImg.src = img.src; lbImg.alt = img.alt; lb.hidden = false;
+    });
+  });
+  lb.addEventListener('click', function(){ lb.hidden = true; });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') lb.hidden = true; });
+
+  // Copy buttons
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.copy), txt = el.textContent.trim();
+      function done(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); }
+      function fallback(){ var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1600); }
+      try { navigator.clipboard.writeText(txt).then(done, fallback); } catch(e){ fallback(); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
